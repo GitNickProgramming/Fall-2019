@@ -1,0 +1,62 @@
+8/20/19
+
+Homework:
+    -
+
+I. Eight Great Ideas In Computer Architecture:
+    - Moore's Law
+    - Use Abstraction to dimplify design
+        ~ Use Abstraction to characterize the design at different levels of representation;
+        Lower-level details are hidden to offer a simpler model at higher levels.
+    - Make The Common case fast
+        ~ Making the common case fast will tend to enhance performance better than optimizing the rare case.
+    - Performance via Parallelism:
+        ~ Computer architects have offereed designs that get more performance by computer operations in parallel.
+    - Performance via pipelining
+        ~ A particular pattern of parallelism is so prevalent in computer architecture that it merits its own name.
+        ~ Pipelining, which moves multiple operations through hardware units that each do a piece of an operations. 
+    - Performance via prediction
+        ~ The idea of prediction is that, in some cases it can be faster on average to guess and start working rather than wait until you
+        know for sure.
+    - Hierarchy of memories 
+        ~ Programmers want the memory to be fast, large, and cheap, as memory speed often shapes performance, capacity limits the size of problems that can be solved
+
+8/22/19
+
+Homework:
+    -
+
+I. CPU Time = CPU Clock cycles* clock time
+
+Consider two different processors P1, and P2 executing the same instruction set. P1 has a 4 GHz clock rate and a CPI of 1. P2 has a 3 GHz clock rate and a CPI of 1.5.
+Which procesor has the highest performance expressed in instructions per second?
+
+Consider three different processors P1, P2, and P3 executing the same instruction set. P1 has 3 GHz clock rate and a CPI of 1.5. P2 has a 2.5 GHz clock rate and a CPI of 1.0. P3 has a 4.0 GHz clock rate and has a CPI of 2.2.
+Which Processor has the highest performance expressed in instructions per second?
+If the processors each execute a program in 10 seconds, find the number of cycles and the number of instructions.
+
+
+8/27/2019
+
+Homework:
+    - Quiz 2
+
+Schedule:
+    - 2.1 Race, Ethnicity, and European Imperial Projects
+
+I. Announcements
+II. Administering new Spain
+    a. Casta Paintings
+    b. The Mission System
+    c. The Pueblo Revolt
+III. New France
+    a. New Understandings of Race
+    b. Samuel de Champlain's Dream
+    c. French Relationships with Native Peoples
+IV. English Colonization Efforts
+    a. Virginia
+        - Jamestown
+        - The Powhatan and the First Settlers
+    b. New England
+V. Conclusion:
+    a. Justifying Difference in the Era of European Colonization
