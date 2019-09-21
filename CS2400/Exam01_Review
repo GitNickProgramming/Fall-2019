@@ -539,3 +539,53 @@ V. Practice Questions:
         b. xXOR 11111111 <-----
         c. xXor 11111110
         d. XBIC 11111111
+
+    21. (Instruction)
+        Write a program to solve the below expression:
+            Z = (z << 2) | (C & 15)
+    
+
+    22. (Instruction) 
+        Write a program that adds the 32-bit two's complement representations of -149 and 5. Place the result in register R7. Submit
+        your code with the result value in register R7 commented.
+
+
+    23. (Instruction)
+        Write a Program to mask first 9 bits of a 32 bit binary number.
+    
+    24. (Multiplcation)
+
+        1101 (Multiplicand)
+    x   0110 (Multiplier)
+
+        0000
+       1101
+      1101
+    +0000
+     1001110 (product)
+
+    25. (Instruction)
+        If(i==j)
+            a = a + 1
+        else 
+            a = a - 1
+
+        
+        answer:
+            LDR R4,=a 
+            LDR R5,[R4]
+            LDR R4,=i 
+            LDR R1,[R4]
+            LDR R4,=j
+            LDR R2,[R4]
+            SUB R5, R5, #1
+            CBNZ R3, else1
+            ADD R5, R5, #1
+        B stop
+    else1 
+            SUB R5, R5, R1 
+    stop B stop 
+    a DCD 8
+    i DCD 5
+    j DCD 5
+            END 
