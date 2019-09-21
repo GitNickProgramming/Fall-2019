@@ -33,6 +33,20 @@ Definitions:
         - Million Instructions per second (MIPS):
             + A measurement of program execution speed based on the number of millions of instructions.
         - MIPS is computed as the instruction count is divided by the product of the execution time and 10^6.
+    14. Instructions
+        - Language of Computers
+    15. Vocabulary
+        - Instruction Set 
+        - Different computers have different instruction sets.
+    
+Instruction Examples:
+    1. LDR -> Load Word to register
+    2. STR -> Save word from register 
+    3. LDRB -> Load byte to register 
+    4. STRB -> Load halfword to register 
+    5. STRH -> Save halfword from register
+
+
         
 
 I. Modern Computing System 
@@ -175,15 +189,117 @@ II. Chapter 1 - Abstraction, Technology, and Performance.
             - Formula:
 
                 MIPS = Clock Rate / CPI * 10^6 
-
-
-        
-
-
-        
-
-
 III. Chapter 2 - Instructions for Computers
+    - Review 
+        + ARM has sixteen registers visible at any one time. They are named R0 to R15. All are 32 bits wide. 
+        + All of the Registers are general purpose, save for:
+            ~ R13/SP 
+            ~ Which holds the stack pointer
+            ~ R14/LR 
+            ~ The Link register which holds the caller's return address.
+            ~ R15/PC 
+            ~ Which holds the program counter.
+        + In addtion to the main registers there is also a status register:
+        + CPSR is the current program status register. This holds flags: Results of arithmetic and logical operations
+    - Examples:
+
+        MOV R0, #42
+            * Moves the constant 42 into register R0
+        MOV R2, R3 
+            * Move the contents of register R3 into register R2 
+        MVN R1, R0 
+            * R1 = Not(R0) = -43 
+        MOV R0, R0 
+            * A NOP (no operation) instruction 
+        
+        AND R1, R2, R3 ;R1 = R2 AND R3 
+        ORR R1, R2, R3 ;R1 = R2 or R3 
+        EOR R1, R2, R3 ;R1 = R2 Exclusive OR R3 
+        BIC R1, R2, R3 ;R1 = R2 AND (NOT R3)
+    
+    - LEGv8 Operands 
+
+        32 registers - X0...X30, Xzr 
+        2^62 memory doublewords
+
+    - Operands 
+        + The reason for the limit of 32 registers may be found in the second of our three underlying design principles of hardware technology:
+            1. Smallest is faster 
+        + A very large number of registers may increase the clock cycle time simply because it takes electronic singals
+        longer when they must travel farther.
+        + In LEGv8 architecture Register is 64 bit wide. 
+    - Assembler Directives 
+        + Assembler directives are commands to the assembler that direct the assembly process.
+        + Assembler directives are also called pseudo opcode or pseudo-operations.
+        + Some tasks performed by these directives are:
+            1. Assign the program to certain areas in memory. 
+            2. Define symbols 
+            3. Designate areas of memory for data storage.
+            4. Place tables or other fixed data in memory.
+            5. allow regerences to other programs.
+        + Example:
+            * AREA 
+            * CODE 
+            * DATA 
+            * READONLY 
+            * DCD, DCB, etc.
+    - Load/Store Architecture 
+        + Arm is a load-store architecture language:
+            1. You must load values into registers in order to operate upon them.
+            2. No instructions directly operate on values in memory.
+            3. Word - 4 bytes 
+        + Memory Operands 
+            1. LDR R4,=A 
+            2. LDR R0, [R4]
+            3. LDR R4,=X 
+            4. STR R3, [R4]
+
+             A DCD 0x45
+
+                        AREA Data1, DATA, READWRITE
+             X DCD 0
+    - Data Definition Directive (DCD)
+        + The DCD directive allocates one or more words of memory, aligned on 4-byte boundaries,
+        and defines the initial runtime contents of the memory.
+        + & is a synonym for DCD 
+        + {Label} DCD expression, {expression}
+    - DCB Directive 
+        + The DCB directive allocates one or more bytes of memory, and defines the initial runtime contents of the memory.
+        + num DCB 0x48
+        + C_String DCB "C_string",0
+    - Memory Operands 
+        + Data Transfer instruction:
+            a. A command that moves data between memory and registers.
+        + Address:
+            a. A value used to delineate the location of a specific data element within a memory array.
+        + The data transfer instruction that copies data from memory to a register is traditionally called load.
+    - Memory Array 
+        + A base address is the starting address of an array in memory 
+        + A base register is a register that holds an array's base address 
+        + offset is a constant value added to a base address to locate a particular array element.
+
+            LDR X9, [X22, #8]
+    - LEGv8 Instructions 
+        + R-type Instructions
+            1. ADD 
+            2. SUB 
+        + D-type Instructions 
+            1. Load 
+            2. Store
+        + I-type Instructions 
+            1. ADDI 
+            2. SUBI
+    - AND
+        + A logical bit by bit operation with two operands that calculates a 1 only if there is a 1 in both operands.
+    - OR 
+        + It is a bit-by-bit operation that places a 1 in the result if either operand bit is a 1.
+    - EOR 
+        + A logical bit-by-bit operation with two operands that calculates the exclusive OR of the two operands. 
+        + That is it calculates a 1 only if the values are different in the two operands. 
+
+
+
+
 IV. Chapter 3 - Arithmetic for Computers 
 V. Practice Questions:
     1. (Performance) 
@@ -403,4 +519,23 @@ V. Practice Questions:
             
             Even though computer A has a higher MIPS rating, computer B is actually faster. Thus, using just MIPs rating 
             (or any other subset of factors) to compare performance can be misleading. 
+    18. (Instructions)
+        If X22 has 1000, X9 has 77, and memory locations 1000, 1008, and 1016 have 10, 15, 20 respectively, what do those locations have
+        after the following instructions? 
 
+        STR X9, [X22, #8]
+
+
+    19. (Instructions)
+        Write an ARM assembly program to find the value for the given equation with the decimal values of x=20 and y=90.
+        Store the value in x. Use only ADD operation. 
+
+            z = x-y 
+
+    20. (Instruction)
+        Which Gives the 1's complement of X? 
+
+        a. xXOR 00000000        
+        b. xXOR 11111111 <-----
+        c. xXor 11111110
+        d. XBIC 11111111
