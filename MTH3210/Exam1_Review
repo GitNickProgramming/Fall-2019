@@ -1,0 +1,105 @@
+Outline:
+    I. Basic Properties of Probability
+        a. Based on the Definition
+            - The definition of probability can be used to estimate probabilies of events based on observed (long-run) frequencies
+            - For every event A: 0 <= P(A) <= 1
+            - Domain = {All events of a R.E.}
+            - Range = {Real #'s}
+            - Basic Set of Operations
+                1. Union
+                2. Intersection 
+                3. Complement
+        b. Compliment
+            - A mutually exclusive pair of events are complements to each other.
+            - P(A') = 1 - P(A)
+            - P(A) = 1 - P(A')
+        c. Addition Rule
+            - When two events, A and B, are non-mutually exclusive, the probability that A or B will occur is:
+                1. P(A U B) = P(A) + P(B)
+        d. Subtraction Rule
+            - P(A - B) = P(A U B) - P(B) 
+                       = P(A) - P(A & B)
+        e. Inclusion - Exclusion Rule 
+            - 2 Events:
+                1. P(A U B) = P(A) + P(B) - P(A & B)
+                2. P(A U B U C) = P(A) + P(B) + P(C) - P(A & B) - P(A & C) - P(B & C) + P(A & B & C)
+        f. De Morgan's Rule
+            - P[(A U B)`] = P[A` & B`]
+            - P[(A & B)`] = P[A` U B`]
+        g. Cartersian Product (Fundamental Counting Principle)
+            - The product of two sets: the product of set X and set Y is the set that contains all ordered pairs ( x, y ) for which x belongs to X and y belongs to Y.
+            - A * B = Total # of outcomes
+        h. Permutation
+            - P(n, r) = nPr = (n!) / (n - r)!
+        i. Combinations 
+            - C(n, r) = nCr = (n)! / (n - r)! * r!
+        j. Independence of Events
+            - For events, A, B, if P(A|B) = P(A), in which case P(B|A) = P(B). Then A, B are called - Mutually Independent Events (M.I.E)
+            - If P(A & B) = P(A) * P(B), then A, B, are Independent
+            - Are A, B Independent?
+                1. P(A) = .5
+                2. P(B) = .5
+                3. P(A & B) = .3
+                4. .3 != .5 * .5, Therefore are not independent 
+            - Are A, C Independent?
+                1. P(A) = .5
+                2. P(C) = .4
+                3. P(A & C) = .2 
+                4. .2 = .5 * .5, Therefore are independent
+            - Are B, C Independent?
+                1. B = the ball has a number >= 6
+                2. C = the ball has a number <= 4
+                3. Are mutually exclusive, then they cannot be independent!
+        k. Venn Diagrams:
+            1. Union : or : A U B 
+            2. Intersection : and : A & B 
+            3. Complement : A` 
+            4. Difference : - : A & B` 
+            5. Mutually Exclusive : A & B = 0 
+    II. ELO
+        a. Random Experiment with equally likely outcomes 
+        b. (# of outcomes in A) / n
+        c. Relative Frequency: Take the limit from n to infitity of Fn(A) / n
+    III. Conditional Probabilities
+        - If A, B are M.E. then P(A|B) = 0
+        - P(A|B) = (P(A & B)) / P(B)
+        - Baye's Theory
+    IV. Examples
+        1. In a certain restaurant, 42% of all customers order a steak, 64% order a salad, and 25% order both a steak and a salad.
+            a. What is the probability of a random customer will order either a steak or a salad?
+                P(A U B) = by the Inc.-Exc. Rule
+                         = .42 + .64 -.25
+                         = 0.81
+            b. What is the probability of a random customer will order a salad but not a steak?
+                P(B - A) = P(B) - P(A & B)
+                         = .64 - .25
+            c. What is the probability of random customer will not order a steak or a salad?
+                P(A` & B`) = By de morgan's
+                           = P(A U B)`
+                           = 1 - P(A U B)
+                           = 1 - .81
+                           = .19
+        2. Suppose events A, B, C satisfy the following conditions:
+            A and B` are mutually exclusive, B and C` are mutually exclusive, P(A` & B) = 0.2, P(B` & C) = 0.15, and P(C) = 0.6.
+            P(A) = P(C) - P(B` & C) - P(A` & B)
+                 = 0.6 - 0.2 - 0.15
+                 = 0.25 
+        3. The Composer Beethoven wrote 9 symphones, 5 piano concertos, and 32 piano sonatas.
+            a. How many ways are there to play first a beethoven symphone and then a Beethoven piano concerto?
+                9 * 5 = 45
+            b. For how many years could this policy be continued before exactly the same program would have to be repeated?
+                9  * 5 * 32 = 1440
+                (1440) / 365 = 3.94 years
+        4. A student has 5 math books, 2 history books, and 4 biology books. She puts all the books on the shelf in a random order.
+            a. What is the probability that the math books are together?
+                P(math books are together) = (7 * 5! * 6!) / (11)! 
+                                           = 0.01515
+            b. The Books are arranged by subject?
+                P(Book by subject) = (3! * 5! * 2! * 4!) / 11!
+                                   = .0009
+        5. Peggy has a jar where she keeps her 7 green marbles, 4 yellow marbles, and 6 red marbles. One day she takes 5 marbles out of the jar at random. What is the probability that exactly 3 of them are red?
+            total = 7 + 4 + 6 = 17
+            P(3 out of 5 are red) = [(6C3) * (11C2)] / (17C5) 
+                                  = (20 * 55) / 6188
+                                  = .178
+        
