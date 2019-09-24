@@ -50,6 +50,7 @@ Outline:
                 1. B = the ball has a number >= 6
                 2. C = the ball has a number <= 4
                 3. Are mutually exclusive, then they cannot be independent!
+        k. 
         k. Venn Diagrams:
             1. Union : or : A U B 
             2. Intersection : and : A & B 
@@ -63,7 +64,8 @@ Outline:
     III. Conditional Probabilities
         - If A, B are M.E. then P(A|B) = 0
         - P(A|B) = (P(A & B)) / P(B)
-        - Baye's Theory
+        - Bayes' Theorem:
+            P(B|A) = (P(B|A)*P(A)) / P(B) 
     IV. Examples
         1. In a certain restaurant, 42% of all customers order a steak, 64% order a salad, and 25% order both a steak and a salad.
             a. What is the probability of a random customer will order either a steak or a salad?
@@ -102,4 +104,16 @@ Outline:
             P(3 out of 5 are red) = [(6C3) * (11C2)] / (17C5) 
                                   = (20 * 55) / 6188
                                   = .178
+        6. Here we have : B1 = Blue Taxi, B2 = Green Taxi, A = Eyewitness said 'blue'
+            Then: P(B1) = .5, P(A|B) = .80 [Since 80% get the correct color]
+                  P(B2) = .85, P(A|B) = .20 [Since 20% will get the wrong color]
+            We want P(B1|A)
+                  By Bayes' Theorem, P(B1|A) = (.80 * .15) / (.80 + .15 + .20 * .85) = .12 / .29 = .414
+        7. Check for Independence:
+            Given: P(A) = .22, P(B) = .25, P(A & B) = .11
+            P(A & B) = P(A) * P(B)
+            P(A) * P(B) = .22 * .25 = .055, Not Independent because .055 != .11
+            Given: P(C) = .28, P(A & B) = .07
+            P(B) * P(C) = .25 * .28 = .07, Independent 
+        
         
