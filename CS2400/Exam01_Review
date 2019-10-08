@@ -1,0 +1,591 @@
+Definitions:
+    1. Computer Organization:
+        - Way the hardware components are connected to form the system.
+    2. Computer Design:
+        - Hardware Design
+    3. Computer Architecture:
+        - Structure and Behaviour of the computer as seen by the user (programmer).
+        - Includes information formats, instruction sets and techniques for addressing memory.
+    4. Moore's Law
+        - Moore's Law states that integrated circuit resources double every 18-24 months.
+        - Moore's Law resulted form a 1965 prediction of such growth in IC capacity made
+          by Gordon Moore, one of the founders of Intel.
+    5. Binary Digit 
+        - Also called a bit.
+    6. Instruction 
+        - A command that computer hardware understands and obeys.
+    7. Assembly Language 
+        - A symbolic representation of machine instructions.
+    8. Assembler
+        - A program that translates a symbolic version of instrcutions into the binary version 
+    9. Machine Language 
+        - A binary represenation of machine instructions
+    10. Benchmark: 
+        - A program selected for use in comparing computer performance.
+    11. SPEC (System Performance Evaluation Cooperative)
+        - Is an effort funded and supported by a number of computer vendors to create standard
+        set of benchmarks for modern computer systems.
+    12. Amdahl's Law:
+        - A rule stating that the performance enhancement possible with a given improvement is limited by the amount that the improved feature is used. 
+        - Execution time after improvement = (Execution time affected by improvement/Amount of improvement) + Execution time unaffected 
+    13. MIPS
+        - Alternative for single instruction performance.
+        - Million Instructions per second (MIPS):
+            + A measurement of program execution speed based on the number of millions of instructions.
+        - MIPS is computed as the instruction count is divided by the product of the execution time and 10^6.
+    14. Instructions
+        - Language of Computers
+    15. Vocabulary
+        - Instruction Set 
+        - Different computers have different instruction sets.
+    
+Instruction Examples:
+    1. LDR -> Load Word to register
+    2. STR -> Save word from register 
+    3. LDRB -> Load byte to register 
+    4. STRB -> Load halfword to register 
+    5. STRH -> Save halfword from register
+
+
+        
+
+I. Modern Computing System 
+    - Abstraction:
+        1. Application Requirements (Highest)
+            a. Application
+            b. Algorithm
+            c. Programming Language
+            d. Operating System/Virtual Machines
+        2. Computer Architecture (CS2400)
+            a. Instruction Set Architecture
+            b. Microarchitecture
+            c. Register-Transfer level
+        3. Computer Design & Organisation (CS1400)
+            a. Gates
+            b. Circuits
+            c. Devices
+            d. Physics
+        3. Software Hierarchy
+            a. Human Ideas -> Write a program
+                b. High level Language -> Compiler
+                    c. VM Code -> VM Translator 
+                        d. Low Level Code -> Assembler
+        4. Hardware Platform
+            a. Computer Architecture -> Digital Design 
+                b. Elementary Logic Gates -> Electrical Engineering
+        5. Components of a Computer 
+            1. Input
+            2. Output
+            3. Memory 
+            4. Datapath 
+            5. Control
+
+II. Chapter 1 - Abstraction, Technology, and Performance.
+    - Great Ideas:
+        1. Abstraction 
+            a. Abstractions to characterize the design at different levels of representation; lower
+            level details are hidden to offer a simpler model at higher levels.
+        2. Make the Momoon case fast 
+            a. Making the common case fast will tend to enhance performance better than optimizing the rare case.
+        3. Performance via Parallelism 
+            a. Computer architects have offered designs that get more performance by computing operations in parallel
+        4. Performance via Pipelining
+            a. A particular pattern of parallelism is so prevalent in computer architecture that
+            it merits its own name: Pipelining
+            b. Which moves multiple operations through hardware units that each do a piece of an operation.
+        5. Performance via Prediction 
+            a. The idea of predicton is that in some cases it can be faster on average to guess and start working rather
+            than wait until you know for sure.
+        6. Hierarchy of memories 
+            a. Programmers want the memory to be fast, large, and cheap, as memory speed often shapes performance,
+            capacity limits the size of problems that can be solved, and the cost of memory today is often the 
+            majority of computer cost.
+            b. Architects have found that they can address conflicting demands of fast, large, and cheap memory with a 
+            hierarchy of memories.
+        7. Dependability via Redundancy 
+            a. Computers not only need to be fast; they need to be dependable.
+            b. Since any physical device can fail, we make systems dependable by including redundant components that 
+            can take over when failure occurs.
+    - Performance 
+        + Response Time:
+            a. Fastest time is Best e.g. 20ms vs 90ms
+            b. How long it takes to do a task 
+        + Throughput:
+            a. Total Work done per unit time e.g. tasks/transactions/...per hour 
+        + Formula:
+
+            Performance = 1/Execution Time 
+            Performance/Performance = execution time/Execution time = n 
+
+        + Time: 
+            a. the measure of computer performance
+        + Elapsed Time
+            a. Total response time, including all aspects
+            b. determines system performance 
+        + CPU Time:
+            a. Time spent processing a given job 
+            b. Comprises user CPU time and system CPU time 
+            c. Different programs are affected differently by CPU and system performance
+            d. Formula:
+
+                CPU Time = CPU Clock Cycles * Clock Cycle Time 
+                         = CPU Clock Cycles / Clock Rate 
+            
+        + CPU Clocking:
+            a. Operation of digital hardware governed by a constant-rate clock.
+        + Clock period:
+            a. Duration of a clock cycle 
+        + Clock frequency (rate):
+            a. Cycles per second 
+        + Performance improved by:
+            a. Reducing number of clock cycles 
+            b. Increasing clock rate
+        + Instruction Performance:
+            a. Number of instructions need for the program.
+            b. CPU Clock cycles = Instructions for a program * average clock cycle per instruction.
+            c. Clock cycles per instruction (CPI):
+                + Average number of clock cycles per instruction for a program or program fragment.
+            d. Instruction Count and CPI:
+
+                Clock Cycles = Instruction Count * Cycles Per Instruction 
+                CPU Time = Instruction Count * CPI * Clock Cycle Time 
+                         = Instruction Count * CPI / Clock Rate 
+            e. Instruction Count for a Program is determined by program, ISA and compiler 
+            f. Aver Cycles Per Instruction 
+                + Determined by CPU Hardware 
+                + If different instructions have different CPI
+                + Average CPI Affected by instruction mix 
+        + CPI In more Detail 
+            a. If different instruction classes take different numbers of cycles 
+                Clock Cycles = Summation(CPI * Instruction Count)
+
+            b. The equation is used for CPU clock cycles based on instruction count and CPI to find
+            the total number of clock cycles for each sequence:
+                Global CPI = Total Clock Cycles / Total Instructions
+        + Trade Off in RISC and CISC 
+            a. RISC 
+                1. Increased number of Instructions per program 
+                2. Decreases CPI 
+                3. Decreases Clock Cycle Time 
+            b. CISC 
+                1. Reduced number of instructions per program
+                2. Increases CPI, and 
+                3. Increases Clock Cycle Time.
+            - Hence Risc Shows Higher Performance
+        + Power Wall
+            - The dominant technology for integrated circuits is called CMOS (complementary metal oxide semiconductor).
+            - For CMOS, the primary source of energy consumption is called Dynamic Energy.
+                a. That is, energy that is consumed when transistors switch states from 0 to 1 and vice versa.
+            - The dynamic energy depends on the capacitive loading of each transistor and the voltage applied:
+                a. Energy = Capacitive load * voltage^2
+                b. the energy of a single transition is then 
+                    Energy = (1/2) * Capacitive load x Voltage^2
+                c. Formula:
+
+                    Power = (1/2) * Capacitive load x Voltage^2 x Frequency switched 
+
+                    Frequency switched is a function of the clock rate.
+        + MIPS
+            - Formula:
+
+                MIPS = Clock Rate / CPI * 10^6 
+III. Chapter 2 - Instructions for Computers
+    - Review 
+        + ARM has sixteen registers visible at any one time. They are named R0 to R15. All are 32 bits wide. 
+        + All of the Registers are general purpose, save for:
+            ~ R13/SP 
+            ~ Which holds the stack pointer
+            ~ R14/LR 
+            ~ The Link register which holds the caller's return address.
+            ~ R15/PC 
+            ~ Which holds the program counter.
+        + In addtion to the main registers there is also a status register:
+        + CPSR is the current program status register. This holds flags: Results of arithmetic and logical operations
+    - Examples:
+
+        MOV R0, #42
+            * Moves the constant 42 into register R0
+        MOV R2, R3 
+            * Move the contents of register R3 into register R2 
+        MVN R1, R0 
+            * R1 = Not(R0) = -43 
+        MOV R0, R0 
+            * A NOP (no operation) instruction 
+        
+        AND R1, R2, R3 ;R1 = R2 AND R3 
+        ORR R1, R2, R3 ;R1 = R2 or R3 
+        EOR R1, R2, R3 ;R1 = R2 Exclusive OR R3 
+        BIC R1, R2, R3 ;R1 = R2 AND (NOT R3)
+    
+    - LEGv8 Operands 
+
+        32 registers - X0...X30, Xzr 
+        2^62 memory doublewords
+
+    - Operands 
+        + The reason for the limit of 32 registers may be found in the second of our three underlying design principles of hardware technology:
+            1. Smallest is faster 
+        + A very large number of registers may increase the clock cycle time simply because it takes electronic singals
+        longer when they must travel farther.
+        + In LEGv8 architecture Register is 64 bit wide. 
+    - Assembler Directives 
+        + Assembler directives are commands to the assembler that direct the assembly process.
+        + Assembler directives are also called pseudo opcode or pseudo-operations.
+        + Some tasks performed by these directives are:
+            1. Assign the program to certain areas in memory. 
+            2. Define symbols 
+            3. Designate areas of memory for data storage.
+            4. Place tables or other fixed data in memory.
+            5. allow regerences to other programs.
+        + Example:
+            * AREA 
+            * CODE 
+            * DATA 
+            * READONLY 
+            * DCD, DCB, etc.
+    - Load/Store Architecture 
+        + Arm is a load-store architecture language:
+            1. You must load values into registers in order to operate upon them.
+            2. No instructions directly operate on values in memory.
+            3. Word - 4 bytes 
+        + Memory Operands 
+            1. LDR R4,=A 
+            2. LDR R0, [R4]
+            3. LDR R4,=X 
+            4. STR R3, [R4]
+
+             A DCD 0x45
+
+                        AREA Data1, DATA, READWRITE
+             X DCD 0
+    - Data Definition Directive (DCD)
+        + The DCD directive allocates one or more words of memory, aligned on 4-byte boundaries,
+        and defines the initial runtime contents of the memory.
+        + & is a synonym for DCD 
+        + {Label} DCD expression, {expression}
+    - DCB Directive 
+        + The DCB directive allocates one or more bytes of memory, and defines the initial runtime contents of the memory.
+        + num DCB 0x48
+        + C_String DCB "C_string",0
+    - Memory Operands 
+        + Data Transfer instruction:
+            a. A command that moves data between memory and registers.
+        + Address:
+            a. A value used to delineate the location of a specific data element within a memory array.
+        + The data transfer instruction that copies data from memory to a register is traditionally called load.
+    - Memory Array 
+        + A base address is the starting address of an array in memory 
+        + A base register is a register that holds an array's base address 
+        + offset is a constant value added to a base address to locate a particular array element.
+
+            LDR X9, [X22, #8]
+    - LEGv8 Instructions 
+        + R-type Instructions
+            1. ADD 
+            2. SUB 
+        + D-type Instructions 
+            1. Load 
+            2. Store
+        + I-type Instructions 
+            1. ADDI 
+            2. SUBI
+    - AND
+        + A logical bit by bit operation with two operands that calculates a 1 only if there is a 1 in both operands.
+    - OR 
+        + It is a bit-by-bit operation that places a 1 in the result if either operand bit is a 1.
+    - EOR 
+        + A logical bit-by-bit operation with two operands that calculates the exclusive OR of the two operands. 
+        + That is it calculates a 1 only if the values are different in the two operands. 
+
+
+
+
+IV. Chapter 3 - Arithmetic for Computers 
+V. Practice Questions:
+    1. (Performance) 
+        Cars dirve 60km/h over a 1km long bridge. A car thus requires 1 minute to cross the bridge. Cars stay 
+        separated by about 100m, so 1 car enters and another exits the bridge every 6 seconds.
+
+        The execution time is ______?
+        
+        
+        answer: 1 min
+        
+        What is the throughput for the same scenario?
+        
+        
+        answer: 10 cars
+    
+    2. (Performance)
+        Replacing a processor in a computer with a faster processor has what effect?
+
+        answer: Decrease in Repsonse time and Increase in throughput
+
+    3. (Performance)
+        Adding additional processor to a system that uses multiple processors for separate tasks --for example, 
+        searching the web -- has what effect? Assume that before adding processors, tasks do not wait to execute
+        (Tasks do not "queue up").
+
+        answer: Increase Throughput
+
+    4. (Performance) 
+        If a computer A runs a program in 10 seconds and computer B runs the same program in 15 seconds, how 
+        much faster is A than B? 
+
+        answer: Time taken to run a program
+        10s on A, and 15s on B 
+
+        Execution Time/Execution time = 15s/10s = 1.5
+        Therefore, A is 1.5 times faster than B 
+
+    5. (Performance) 
+        Computer C's Performance is 4 times as fast as the performance of computer B, which runs a given 
+        application in 28 seconds. How long will computer C take to run that application? 
+
+        answer: 
+        Performance/Performance = Execution time/Execution time 
+        Time is the measure of computer performance 
+    
+    6. (Performance) 
+        A task runs alone on a CPU. The task starts by running for 5ms. The task then waits for 4ms while the
+        operating system runs some instructions to access disk. The CPU is then idle for 2ms while waiting for data
+        from the disk. Finally the task runs another 10 ms and completes.
+
+        answer:
+        The elapsed time = 5 + 4 + 2 + 10
+                         = 21 
+        Elapsed time is the total time, also know as wall clock time or response time.
+
+        The user CPU time = 5 + 10
+                          = 15 
+        User CPU time is just the time that the task runs on the CPU. 
+
+        The System CPU time = 5 + 4 + 10
+                            = 19 ms 
+        CPU time is the total time the CPU spends running instructions either of this taks or of the operating system of for this task.
+
+        System performance is the elapsed time, so 5 + 4 + 2 + 10 = 21
+        The CPU performance is just the user CPU time, so 5 + 10 = 25
+    
+    7. (Performance)
+        Our Favorite Program runs in 10 seconds on computer A, Which as a 2 GHz clock. We are trying to help a computer designer build a
+        computer, B, which will run this program in 6 seconds. The designer has determined that a substantial increase in the clock rate
+        is possible, but this incease will affect the rest of the CPU design, causing computer B to require 1.2 times as many clock cycles 
+        as computer A for this program. What clock rate should we tell the designer to target? 
+
+        answer:
+                A: 2 Ghz clock, 10s CPU time 
+
+                Designing Computer B 
+                Aim is for 6s CPU Time
+                Restriction: can do faster clock, but 1.2xclock cycles
+
+                Clock Rate = Clock Cycles/CPU time = 1.2 x Clock Cycles/ 6s
+                Clock Cycles = CPU time * Clock Rate 
+                             = 10s X 2 GHz = 20 * 10^9
+
+                Clock Rate = (1.2 * 20 x 10^9)/6s
+                           = (24x10^9)/6s = 4 GHz
+
+    8. (Performance - CPI) 
+        Suppose we have two implementations of the same instruction set architecture. Computer A has a clock cycle time of 250ps and 
+        CPI of 2.0 for some program, and computer B has a clock cycle time of 500ps and a CPI of 1.2 for the same program. Which 
+        computer is faster for this program and by how much?
+
+        Computer A: Clock Cycle Time = 250ps, CPI = 2.0
+        Computer B: Clock Cycle Time = 500ps, CPI = 1.2 
+
+        Which Computer has a faster clock?
+             Same Instruction set Architecture (ISA)
+        Which is faster, and by how much?
+
+        answer:
+            CPU Time(A) = Instruction n Count * CPI(A) * Cycle Time(A) 
+                        = I * 2.0 * 250ps = I * 500ps                   ---> A is faster
+            CPU Time(B) = Instruction n Count * CPI(B) * Cycle Time(B)
+                        = I * 1.2 * 500ps = I * 600ps 
+            CPU Time(B)/CPU Time(A) = (I * 600ps)/(I * 500ps) = 1.2     ---> By this much
+
+    9. (Performance - CPI)
+        Alternative compiled code sequences using instructions in classes A, B, C 
+        Class       A       B       C 
+        CPI         1       2       3   
+        IC seq1     2       1       2  
+        IC seq2     4       1       1 
+
+        Sequence 1: IC = 5 
+        Clock Cycles = 2*1 + 1*2 + 2*3 
+                     = 10 
+        Avg. CPI = 10/5 = 2.0
+
+        Sequence 2: IC = 6 
+        Clock Cycles = 4*1 + 1*2 + 1*3 
+                     = 9 
+        Avg. CPI = 9/6
+                 = 1.5 
+    
+    10. (Performance - Review Q)
+        A given application written in Java runs 15seconds on a desktop procesor. A new Java compiler.
+        Unfortunately, It increased the CPI by 1.1. How fast can we expect the application to run using
+        this new compiler? 
+
+        Execution Time = Instruction Count * CPI * Clock Cycle 
+
+        Solving for both compilers we get:
+            Execution time of C1 / Execution time of C2 
+        
+        Answer: Execution time of C2 = 15 * .6 * 1.1 
+    
+    11. (Performance)
+        Consider two different processors P1 and P2 executing the same instruction set. P1 has a 4 GHz clock 
+        rate and a CPI of 1. P2 has a 3 GHz Clock Rate and a CPI of 1.5. Which processor has the highest performance 
+        Expressed in instructions per second?
+
+    12. (Performance)
+        Consider three different processors P1, P2, and P3, executing the same instruction set. P1 has 3GHz clock rate and a CPI of 1.5.
+        P2 has a 2.5 GHz clock rate and a CPI of 1.0. P3 has a 4.0 GHz clock rate and has a CPI of 2.2.
+
+        Which Processor has the highest performance expressed in instructions per second?
+        If the Processors each execute a program in 10 seconds, find the number of cycles and the number of instructions.
+
+        Answer:
+            3Ghz / 1.5 = 2x10^9
+            2.5GHz / 1.0 = 2.5x10^9
+            4GHz / 2.2 = 1.82x10^9
+            Therefore, P2 has the higest performance among the three 
+
+            Cycles:
+            P1: 3GHz * 10 = 3x10^10 cycles 
+            P2: 2.5GHz * 10 = 2.5x10^10 cycles 
+            P3: 4GHz * 10 = 4 * 10^10 cycles 
+
+            Number of Instructions:
+            P1: 3GHz * 10 / 1.5 = 2x10^10 instructions 
+            P2: 2.5GHz * 10 / 1.0 = 2.5x10^10 instrcutions
+            P3: 4GHz * 10 / 2.2 = 1.82x10^10 instructions
+
+    13. (Performance)
+        Voltage = 4V , frequency = 1Ghz, and power = 3W. Frequency is increased to 6Ghz. What is the new power?
+
+        Power = k x voltage^2 x Frequency switched 
+
+            k = 3 / (16x10^9)
+
+        new Power = k x (4)^2 x (6 x 10^9)
+
+    14. (Performance)
+        Suppose we developed a new, simpler processor that has 85% of the capacitive load of the more complex older
+        processor. Further, assume that it can adjust voltage so that it can reduce voltage 15% compared to processor B,
+        which results in a 15% shrink in frequency. What is the impact on dynamic power?
+
+        P = (1/2) * Capacitive load x voltage^2 x Frequency switched 
+
+        Compare by: Power(new) / Power(old)
+
+    15. (Performance)
+        A Program runs in 100 seconds. Multiply operations are responsible for 30 of those seconds. If extensive designer
+        effort is applied such that multiply operations are made to run 2 times faster, what is the program's new execution time?
+
+        Execution time after improvement = (Execution time affected by improvement/Amount of improvement) + execution time unaffected 
+                                         = 30 / 2 + 70 = 85 sec
+
+    16. (Performance)
+        Suppose a program runs in 100 seconds on a computer, with multiply operations responsible for 80 seconds of this time.
+        How much do I have to improve the speed of multiplication if I want my program to run five times faster? 
+
+        100/5 = 80/? + 20
+
+    17. (MIPS)
+        Consider the following performance measurements for a program:
+            Measurement             Computer A      Computer B 
+            Instruction Count       10 billion      8 Billion 
+            Clock Rate              4 GHz           4 GHz 
+            CPI                     1.0             1.1 
+
+        Which computer has the higher MIPS rating?
+        Which computer is faster for that program?
+
+        4x10^9 / 1.0x10^6 = 4000
+        4x10^9 / 1.1x10^6 = 3636 
+
+        answer:
+            Computer A executes more than a million instructions per second, so computer A has a higher MIPS rating than computer B. 
+
+            CPU time = instr count * CPI * Clock cycle time 
+                     = 10 * 10^9 instr * (1.0 cycles / ir.str) * (1/4x10^9 sec)
+                     = 2.5 sec 
+            CPU time = 8x10^9 instr * (1.1 cycles / ir.str) * (1/4x10^9 sec)
+                     = 2.2 sec 
+            
+            Even though computer A has a higher MIPS rating, computer B is actually faster. Thus, using just MIPs rating 
+            (or any other subset of factors) to compare performance can be misleading. 
+    18. (Instructions)
+        If X22 has 1000, X9 has 77, and memory locations 1000, 1008, and 1016 have 10, 15, 20 respectively, what do those locations have
+        after the following instructions? 
+
+        STR X9, [X22, #8]
+
+
+    19. (Instructions)
+        Write an ARM assembly program to find the value for the given equation with the decimal values of x=20 and y=90.
+        Store the value in x. Use only ADD operation. 
+
+            z = x-y 
+
+    20. (Instruction)
+        Which Gives the 1's complement of X? 
+
+        a. xXOR 00000000        
+        b. xXOR 11111111 <-----
+        c. xXor 11111110
+        d. XBIC 11111111
+
+    21. (Instruction)
+        Write a program to solve the below expression:
+            Z = (z << 2) | (C & 15)
+    
+
+    22. (Instruction) 
+        Write a program that adds the 32-bit two's complement representations of -149 and 5. Place the result in register R7. Submit
+        your code with the result value in register R7 commented.
+
+
+    23. (Instruction)
+        Write a Program to mask first 9 bits of a 32 bit binary number.
+    
+    24. (Multiplcation)
+
+        1101 (Multiplicand)
+    x   0110 (Multiplier)
+
+        0000
+       1101
+      1101
+    +0000
+     1001110 (product)
+
+    25. (Instruction)
+        If(i==j)
+            a = a + 1
+        else 
+            a = a - 1
+
+        
+        answer:
+            LDR R4,=a 
+            LDR R5,[R4]
+            LDR R4,=i 
+            LDR R1,[R4]
+            LDR R4,=j
+            LDR R2,[R4]
+            SUB R5, R5, #1
+            CBNZ R3, else1
+            ADD R5, R5, #1
+        B stop
+    else1 
+            SUB R5, R5, R1 
+    stop B stop 
+    a DCD 8
+    i DCD 5
+    j DCD 5
+            END 
